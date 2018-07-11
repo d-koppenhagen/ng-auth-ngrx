@@ -12,15 +12,11 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(): boolean {
     const authData = this.auth.getAuthData();
-
-    // check if token is already expired
-    const validToken = new Date().getTime() < authData.tokenExpires;
-
-    if (!authData || !validToken) {
-      this.router.navigateByUrl('/login');
-      return false;
+    if (authData && new Date().getTime() < authData.tokenExpires) {
+      return true;
     }
 
-    return true;
+    this.router.navigateByUrl('/login');
+    return false;
   }
 }
