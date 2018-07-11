@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Md5 } from 'ts-md5/dist/md5';
+import { Md5 } from 'ts-md5';
 
 import { User } from '../models/user';
+import { AuthData } from '../models/auth';
 
 @Injectable()
 export class AuthService {
@@ -13,6 +14,10 @@ export class AuthService {
 
   getUserData(): User {
     return JSON.parse(localStorage.getItem('currentUser'));
+  }
+
+  getAuthData(): AuthData {
+    return JSON.parse(localStorage.getItem('auth'));
   }
 
   logIn(email: string, password: string): Observable<any> {

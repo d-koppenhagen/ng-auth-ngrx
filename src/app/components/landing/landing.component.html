@@ -4,7 +4,7 @@
     <h1>Angular + NGRX</h1>
     <hr><br>
 
-    <div *ngIf="isAuthenticated; then doSomething; else doSomethingElse;"></div>
+    <div *ngIf="auth?.isAuthenticated; then doSomething; else doSomethingElse;"></div>
     <ng-template #doSomething>
       <p>You logged in <em>{{user.email}}!</em></p>
       <button class="btn btn-primary" (click)="logOut()">Log out</button>
@@ -22,11 +22,9 @@
       <div class="card-body">
         <h5 class="card-title">Current State</h5>
         <ul>
-          <li><strong>isAuthenticated</strong> - {{isAuthenticated}}</li>
-          <li><strong>user.email</strong> - {{ user?.email || 'null'}}</li>
-          <li><strong>user.token</strong> - {{ user?.token || 'null'}}</li>
-          <li><strong>user.tokenExpires</strong> - {{ user?.tokenExpires || 'null'}}</li>
-          <li><strong>errorMessage</strong> - {{ errorMessage || 'null'}}</li>
+          <li><strong>auth</strong> - {{ auth || 'null' | json }}</li>
+          <li><strong>user</strong> - {{ user || 'null' | json }}</li>
+          <li><strong>errorMessage</strong> - {{ errorMessage || 'null' }}</li>
         </ul>
       </div>
     </div>

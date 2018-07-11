@@ -16,6 +16,7 @@ import {
   SignUpFailure,
   LogOut,
 } from '../actions/auth.actions';
+import { AuthData } from '../../models/auth';
 
 
 @Injectable()
@@ -36,12 +37,7 @@ export class AuthEffects {
         return this.authService.logIn(payload.email, payload.password)
           .pipe(
             map(res => {
-              console.log(res);
-              return new LogInSuccess({
-                token: res.token,
-                email: res.user.email,
-                tokenExpires: res.expires
-              });
+              return new LogInSuccess(res);
             }),
             catchError(error => {
               console.log(error);
@@ -55,8 +51,14 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   LogInSuccess: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN_SUCCESS),
-    tap((user) => {
-      localStorage.setItem('currentUser', JSON.stringify(user.payload));
+    tap(res => {
+      const authData: AuthData = {
+        tokenExpires: res.payload.expires,
+        token: res.payload.token,
+        user: res.payload.user.email
+      };
+      localStorage.setItem('auth', JSON.stringify(authData));
+      localStorage.setItem('currentUser', JSON.stringify(res.payload.user));
       this.router.navigateByUrl('/');
     })
   );
@@ -91,8 +93,10 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   SignUpSuccess: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.SIGNUP_SUCCESS),
-    tap((user) => {
-      localStorage.setItem('currentUser', JSON.stringify(user.payload));
+    tap((res) => {
+      console.log(res);
+      localStorage.setItem('auth', JSON.stringify(res.payload.auth));
+      localStorage.setItem('currentUser', JSON.stringify(res.payload.user));
       this.router.navigateByUrl('/');
     })
   );
@@ -107,6 +111,7 @@ export class AuthEffects {
     ofType(AuthActionTypes.LOGOUT),
     tap((user) => {
       localStorage.removeItem('currentUser');
+      localStorage.removeItem('auth');
     })
   );
 }

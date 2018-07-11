@@ -1,26 +1,30 @@
 import { User } from '../../models/user';
+import { AuthData } from '../../models/auth';
 import { AuthActionTypes, All } from '../actions/auth.actions';
 
 
 export interface AuthState {
   // is a user authenticated?
-  isAuthenticated: boolean;
+  auth: AuthData;
   // if authenticated, there should be a user object
   user: User | null;
   // error message
   errorMessage: string | null;
 }
 
+const currentAuthState: AuthData = JSON.parse(localStorage.getItem('auth'));
 const currentUser: User = JSON.parse(localStorage.getItem('currentUser'));
+console.log(currentAuthState);
 console.log(currentUser);
 
-export const initialState: AuthState = currentUser ?
+export const initialState: AuthState = currentAuthState
+  && currentUser ?
   {
-    isAuthenticated: true,
+    auth: currentAuthState,
     user: currentUser,
     errorMessage: null
   } : {
-    isAuthenticated: false,
+    auth: null,
     user: null,
     errorMessage: null
   };
@@ -30,12 +34,12 @@ export function reducer(state = initialState, action: All): AuthState {
     case AuthActionTypes.LOGIN_SUCCESS: {
       return {
         ...state,
-        isAuthenticated: true,
-        user: {
+        auth: {
           token: action.payload.token,
-          tokenExpires: action.payload.tokenExpires,
-          email: action.payload.email
+          tokenExpires: action.payload.expires,
+          user: action.payload.user.email
         },
+        user: action.payload.user,
         errorMessage: null
       };
     }
@@ -48,12 +52,12 @@ export function reducer(state = initialState, action: All): AuthState {
     case AuthActionTypes.SIGNUP_SUCCESS: {
       return {
         ...state,
-        isAuthenticated: true,
-        user: {
+        auth: {
           token: action.payload.token,
           tokenExpires: action.payload.tokenExpires,
-          email: action.payload.email
+          user: action.payload.email
         },
+        user: null,
         errorMessage: null
       };
     }

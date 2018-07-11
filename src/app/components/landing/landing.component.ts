@@ -10,7 +10,7 @@ import { LogOut } from '../../store/actions/auth.actions';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
-  isAuthenticated = false;
+  auth = null;
   user = null;
   errorMessage = null;
 
@@ -21,7 +21,7 @@ export class LandingComponent implements OnInit {
   ngOnInit() {
     this.store.select(selectAuthState).subscribe(state => {
       console.log(state);
-      this.isAuthenticated = state.isAuthenticated;
+      this.auth = state.auth;
       this.user = state.user;
       this.errorMessage = state.errorMessage;
     });
