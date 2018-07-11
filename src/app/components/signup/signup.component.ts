@@ -25,7 +25,7 @@ export class SignUpComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
+  onSubmit() {
     const payload = {
       email: this.user.email,
       password: this.user.password

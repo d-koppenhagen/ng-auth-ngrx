@@ -18,7 +18,6 @@ import {
 } from '../actions/auth.actions';
 import { AuthData } from '../../models/auth';
 
-
 @Injectable()
 export class AuthEffects {
 
