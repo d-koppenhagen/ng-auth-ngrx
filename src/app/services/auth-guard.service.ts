@@ -22,18 +22,6 @@ export class AuthGuardService implements CanActivate {
       return false;
     }
 
-    console.log(userData);
-    this.store.dispatch({
-      type: AuthActionTypes.LOGIN_EXISTING_DATA,
-      payload: {
-        isAuthenticated: true,
-        user: {
-          token: userData.token,
-          email: userData.email
-        },
-        errorMessage: null
-      }
-    });
     return true;
   }
 }

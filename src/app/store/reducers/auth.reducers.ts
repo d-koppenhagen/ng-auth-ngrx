@@ -12,6 +12,7 @@ export interface AuthState {
 }
 
 const currentUser: User = JSON.parse(localStorage.getItem('currentUser'));
+console.log(currentUser);
 
 export const initialState: AuthState = currentUser ?
   {
@@ -32,6 +33,7 @@ export function reducer(state = initialState, action: All): AuthState {
         isAuthenticated: true,
         user: {
           token: action.payload.token,
+          tokenExpires: action.payload.tokenExpires,
           email: action.payload.email
         },
         errorMessage: null
@@ -49,6 +51,7 @@ export function reducer(state = initialState, action: All): AuthState {
         isAuthenticated: true,
         user: {
           token: action.payload.token,
+          tokenExpires: action.payload.tokenExpires,
           email: action.payload.email
         },
         errorMessage: null
