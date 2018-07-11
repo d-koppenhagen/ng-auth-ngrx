@@ -11,12 +11,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  getToken(): string {
-    return localStorage.getItem('token');
-  }
-
-  getKey(): string {
-    return localStorage.getItem('key');
+  getUserData(): User {
+    return JSON.parse(localStorage.getItem('currentUser'));
   }
 
   logIn(email: string, password: string): Observable<any> {

@@ -19,12 +19,11 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor(private injector: Injector) {}
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.authService = this.injector.get(AuthService);
-    const token: string = this.authService.getToken();
-    const key: string = this.authService.getKey();
+    const user = this.authService.getUserData() ? this.authService.getUserData() : { token: null, email: null };
     request = request.clone({
       setHeaders: {
-        'x-access-token': `${token}`,
-        'x-key': `${key}`,
+        'x-access-token': `${user.token}`,
+        'x-key': `${user.email}`,
         'Content-Type': 'application/json'
       }
     });
@@ -41,8 +40,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       .pipe(
         catchError((response: any) => {
           if (response instanceof HttpErrorResponse && response.status === 401) {
-            localStorage.removeItem('token');
-            localStorage.removeItem('key');
+            localStorage.removeItem('currentUser');
             this.router.navigateByUrl('/login');
           }
           return observableThrowError(response);

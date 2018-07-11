@@ -11,7 +11,6 @@ import { LogIn } from '../../store/actions/auth.actions';
   styleUrls: ['./login.component.css']
 })
 export class LogInComponent implements OnInit {
-
   user: User = new User();
   errorMessage: string | null;
 

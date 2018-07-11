@@ -11,11 +11,18 @@ export interface AuthState {
   errorMessage: string | null;
 }
 
-export const initialState: AuthState = {
-  isAuthenticated: false,
-  user: null,
-  errorMessage: null
-};
+const currentUser: User = JSON.parse(localStorage.getItem('currentUser'));
+
+export const initialState: AuthState = currentUser ?
+  {
+    isAuthenticated: true,
+    user: currentUser,
+    errorMessage: null
+  } : {
+    isAuthenticated: false,
+    user: null,
+    errorMessage: null
+  };
 
 export function reducer(state = initialState, action: All): AuthState {
   switch (action.type) {
