@@ -20,7 +20,7 @@ describe('SignUp Component', () => {
       .contains('You logged in test@test.com!')
       .should('not.be.visible');
     cy
-      .location('pathname').should('eq', '/sign-up')
+      .location('pathname').should('eq', '/signup')
       .get('div.alert.alert-danger')
       .contains('That email is already in use.');
   });

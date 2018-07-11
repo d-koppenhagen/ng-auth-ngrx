@@ -1,14 +1,17 @@
+
+import { throwError as observableThrowError,  Observable, pipe } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Injectable, Injector } from '@angular/core';
 import {
-  HttpEvent, HttpInterceptor, HttpHandler, HttpRequest,
-  HttpResponse, HttpErrorResponse
+  HttpEvent,
+  HttpInterceptor,
+  HttpHandler,
+  HttpRequest,
+  HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/do';
 import { Router } from '@angular/router';
 
 import { AuthService } from './auth.service';
-
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -17,9 +20,11 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.authService = this.injector.get(AuthService);
     const token: string = this.authService.getToken();
+    const key: string = this.authService.getKey();
     request = request.clone({
       setHeaders: {
-        'Authorization': `Bearer ${token}`,
+        'x-access-token': `${token}`,
+        'x-key': `${key}`,
         'Content-Type': 'application/json'
       }
     });
@@ -33,12 +38,15 @@ export class ErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     return next.handle(request)
-      .catch((response: any) => {
-        if (response instanceof HttpErrorResponse && response.status === 401) {
-          localStorage.removeItem('token');
-          this.router.navigateByUrl('/log-in');
-        }
-        return Observable.throw(response);
-      });
+      .pipe(
+        catchError((response: any) => {
+          if (response instanceof HttpErrorResponse && response.status === 401) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('key');
+            this.router.navigateByUrl('/login');
+          }
+          return observableThrowError(response);
+        })
+      );
   }
 }

@@ -20,7 +20,7 @@ describe('LogIn Component', () => {
       .contains('You logged in test@test.com!')
       .should('not.be.visible');
     cy
-      .location('pathname').should('eq', '/log-in')
+      .location('pathname').should('eq', '/login')
       .get('div.alert.alert-danger')
       .contains('Incorrect email and/or password.');
   });

@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { Md5 } from 'ts-md5/dist/md5';
 
 import { User } from '../models/user';
 
-
 @Injectable()
 export class AuthService {
-  private BASE_URL = 'http://localhost:1337';
+  private BASE_URL = 'http://localhost:8080';
 
   constructor(private http: HttpClient) {}
 
@@ -15,18 +15,17 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  getKey(): string {
+    return localStorage.getItem('key');
+  }
+
   logIn(email: string, password: string): Observable<any> {
     const url = `${this.BASE_URL}/login`;
-    return this.http.post<User>(url, {email, password});
+    return this.http.post<User>(url, { username: email, password: Md5.hashStr(password) });
   }
 
   signUp(email: string, password: string): Observable<User> {
-    const url = `${this.BASE_URL}/register`;
-    return this.http.post<User>(url, {email, password});
-  }
-
-  getStatus(): Observable<User> {
-    const url = `${this.BASE_URL}/status`;
-    return this.http.get<User>(url);
+    const url = `${this.BASE_URL}/signup`;
+    return this.http.post<User>(url, { username: email, password: Md5.hashStr(password) });
   }
 }
