@@ -4,14 +4,14 @@
     <h1>Angular + NGRX</h1>
     <hr><br>
 
-    <div *ngIf="auth?.isAuthenticated; then doSomething; else doSomethingElse;"></div>
+    <div *ngIf="auth?.token; then doSomething; else doSomethingElse;"></div>
     <ng-template #doSomething>
-      <p>You logged in <em>{{user.email}}!</em></p>
-      <button class="btn btn-primary" (click)="logOut()">Log out</button>
+      <p>You logged in <em>{{ auth.user }}!</em></p>
+      <button class="btn btn-primary" (click)="logOut()">Logout</button>
     </ng-template>
     <ng-template #doSomethingElse>
-      <a [routerLink]="['/login']" class="btn btn-primary">Log in</a>
-      <a [routerLink]="['/signup']" class="btn btn-primary">Sign up</a>
+      <a [routerLink]="['/login']" class="btn btn-primary">Login</a>
+      <a [routerLink]="['/signup']" class="btn btn-primary">Signup</a>
     </ng-template>
 
     <a [routerLink]="['/status']" class="btn btn-primary">Status</a>
