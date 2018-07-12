@@ -11,8 +11,8 @@ import { AuthData } from '../models/auth';
 })
 export class AuthService {
   constructor(
-    @Inject('API_URL') private apiUrl: string,
-    private http: HttpClient
+    @Inject('API_URL') private _apiUrl: string,
+    private _http: HttpClient
   ) {}
 
   getUserData(): User {
@@ -24,12 +24,12 @@ export class AuthService {
   }
 
   logIn(email: string, password: string): Observable<any> {
-    const url = `${this.apiUrl}/login`;
-    return this.http.post<User>(url, { email: email, password: Md5.hashStr(password) });
+    const url = `${this._apiUrl}/login`;
+    return this._http.post<User>(url, { email: email, password: Md5.hashStr(password) });
   }
 
   signUp(email: string, password: string): Observable<User> {
-    const url = `${this.apiUrl}/signup`;
-    return this.http.post<User>(url, { email: email, password: Md5.hashStr(password) });
+    const url = `${this._apiUrl}/signup`;
+    return this._http.post<User>(url, { email: email, password: Md5.hashStr(password) });
   }
 }

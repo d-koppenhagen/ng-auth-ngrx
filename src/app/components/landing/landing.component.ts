@@ -18,13 +18,13 @@ export class LandingComponent implements OnInit {
   exampleData = null;
 
   constructor(
-    private store: Store<AppState>,
-    private es: ExampleService,
+    private _store: Store<AppState>,
+    private _es: ExampleService,
     private _router: Router
   ) { }
 
   ngOnInit() {
-    this.store.select(selectAuthState).subscribe(state => {
+    this._store.select(selectAuthState).subscribe(state => {
       console.log(state);
       this.auth = state.auth;
       this.user = state.user;
@@ -33,12 +33,12 @@ export class LandingComponent implements OnInit {
   }
 
   logOut() {
-    this.store.dispatch(new LogOut);
+    this._store.dispatch(new LogOut);
     this._router.navigateByUrl('/login');
   }
 
   getExampleData() {
-    this.es.getExampleData()
+    this._es.getExampleData()
       .subscribe(res => this.exampleData = res);
   }
 

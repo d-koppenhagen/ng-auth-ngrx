@@ -9,14 +9,14 @@ export class ExampleService {
   baseUrl: string;
 
   constructor(
-    @Inject('API_URL') private apiUrl: string,
-    private http: HttpClient
+    @Inject('API_URL') private _apiUrl: string,
+    private _http: HttpClient
   ) {
-    this.baseUrl = `${this.apiUrl}/api/v1`;
+    this.baseUrl = `${this._apiUrl}/api/v1`;
   }
 
   getExampleData(): Observable<any> {
     const url = `${this.baseUrl}/example`;
-    return this.http.get<any>(url);
+    return this._http.get<any>(url);
   }
 }

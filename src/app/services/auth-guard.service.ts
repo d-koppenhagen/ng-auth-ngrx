@@ -6,17 +6,17 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class AuthGuardService implements CanActivate {
   constructor(
-    public auth: AuthService,
-    public router: Router
+    private _auth: AuthService,
+    private _router: Router
   ) { }
 
   canActivate(): boolean {
-    const authData = this.auth.getAuthData();
+    const authData = this._auth.getAuthData();
     if (authData && new Date().getTime() < authData.tokenExpires) {
       return true;
     }
 
-    this.router.navigateByUrl('/login');
+    this._router.navigateByUrl('/login');
     return false;
   }
 }

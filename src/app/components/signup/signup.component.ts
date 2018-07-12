@@ -16,11 +16,11 @@ export class SignupComponent implements OnInit {
   errorMessage: string | null;
 
   constructor(
-    private store: Store<AppState>
+    private _store: Store<AppState>
   ) { }
 
   ngOnInit() {
-    this.store.select(selectAuthState).subscribe(state => {
+    this._store.select(selectAuthState).subscribe(state => {
       this.errorMessage = state.errorMessage;
     });
   }
@@ -30,7 +30,7 @@ export class SignupComponent implements OnInit {
       email: this.user.email,
       password: this.user.password
     };
-    this.store.dispatch(new SignUp(payload));
+    this._store.dispatch(new SignUp(payload));
   }
 
 }
