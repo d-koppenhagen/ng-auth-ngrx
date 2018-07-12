@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Md5 } from 'ts-md5';
 
 @Injectable({
   providedIn: 'root'

@@ -10,7 +10,7 @@ import { SignUp } from '../../store/actions/auth.actions';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignUpComponent implements OnInit {
+export class SignupComponent implements OnInit {
 
   user: User = new User();
   errorMessage: string | null;
