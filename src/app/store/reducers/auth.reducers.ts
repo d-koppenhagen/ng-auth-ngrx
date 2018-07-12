@@ -2,7 +2,6 @@ import { User } from '../../models/user';
 import { AuthData } from '../../models/auth';
 import { AuthActionTypes, All } from '../actions/auth.actions';
 
-
 export interface AuthState {
   // is a user authenticated?
   auth: AuthData;
@@ -68,7 +67,11 @@ export function reducer(state = initialState, action: All): AuthState {
       };
     }
     case AuthActionTypes.LOGOUT: {
-      return initialState;
+      return {
+        auth: null,
+        user: null,
+        errorMessage: null
+      };
     }
     default: {
       return state;

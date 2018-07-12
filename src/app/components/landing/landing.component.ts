@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { selectAuthState, AppState } from '../../store/app.states';
@@ -18,7 +19,8 @@ export class LandingComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private es: ExampleService
+    private es: ExampleService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -32,6 +34,7 @@ export class LandingComponent implements OnInit {
 
   logOut() {
     this.store.dispatch(new LogOut);
+    this._router.navigateByUrl('/login');
   }
 
   getExampleData() {
