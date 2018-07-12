@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { selectAuthState, AppState } from '../../store/app.states';
 import { LogOut } from '../../store/actions/auth.actions';
+import { ExampleService } from '../../services/example.service';
 
 @Component({
   selector: 'app-landing',
@@ -13,9 +14,11 @@ export class LandingComponent implements OnInit {
   auth = null;
   user = null;
   errorMessage = null;
+  exampleData = null;
 
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private es: ExampleService
   ) { }
 
   ngOnInit() {
@@ -29,6 +32,11 @@ export class LandingComponent implements OnInit {
 
   logOut() {
     this.store.dispatch(new LogOut);
+  }
+
+  getExampleData() {
+    this.es.getExampleData()
+      .subscribe(res => this.exampleData = res);
   }
 
 }

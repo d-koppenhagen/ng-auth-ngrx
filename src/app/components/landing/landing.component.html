@@ -14,9 +14,9 @@
       <a [routerLink]="['/signup']" class="btn btn-primary">Signup</a>
     </ng-template>
 
-    <a [routerLink]="['/status']" class="btn btn-primary">Status</a>
+    <a (click)="getExampleData()" class="btn btn-primary">Get Data</a>
 
-    <br><br><br>
+    <br>
 
     <div class="card">
       <div class="card-body">
@@ -28,6 +28,13 @@
           <li><strong>user</strong> - {{ user || 'null' | json }}</li>
           <li><strong>errorMessage</strong> - {{ errorMessage || 'null' }}</li>
         </ul>
+      </div>
+    </div>
+
+    <div class="card" *ngIf="exampleData">
+      <div class="card-body">
+        <h5 class="card-title">Example Data fetched from server</h5>
+        {{ exampleData | json }}
       </div>
     </div>
 

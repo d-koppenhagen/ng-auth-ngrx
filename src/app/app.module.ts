@@ -43,7 +43,6 @@ import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
     ])
   ],
   providers: [
-    AuthService,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
