@@ -2,19 +2,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
 
+// modules
 import { AppRoutingModule } from './app-routing.module';
+import { AppStoreModule } from './app-store.module';
+
+// components
 import { AppComponent } from './app.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { AuthEffects } from './store/effects/auth.effects';
-import { reducers } from './store/app.states';
 
 @NgModule({
   declarations: [
@@ -27,10 +24,7 @@ import { reducers } from './store/app.states';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    StoreModule.forRoot(reducers, {}),
-    StoreRouterConnectingModule.forRoot(),
-    EffectsModule.forRoot([AuthEffects]),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    AppStoreModule,
     AppRoutingModule
   ],
   bootstrap: [AppComponent]
