@@ -10,6 +10,15 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+  "keywords": [
+    "Angular",
+    "Authorization",
+    "ngrx",
+    "redux"
+  ],
+  "authors": [
+    "Danny Koppenhagen <mail@d-koppenhagen.de> (https://d-koppenhagen.de)"
+  ],
   "private": true,
   "dependencies": {
     "@angular/animations": "6.0.7",
