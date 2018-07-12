@@ -16,11 +16,13 @@ export class AuthService {
   ) {}
 
   getUserData(): User {
-    return JSON.parse(localStorage.getItem('currentUser'));
+    const localStorageUserData = localStorage.getItem('currentUser');
+    return localStorageUserData && localStorageUserData !== 'undefined' ? JSON.parse(localStorageUserData) : null;
   }
 
   getAuthData(): AuthData {
-    return JSON.parse(localStorage.getItem('auth'));
+    const localStorageAuthData = localStorage.getItem('auth');
+    return localStorageAuthData && localStorageAuthData !== 'undefined' ? JSON.parse(localStorageAuthData) : null;
   }
 
   logIn(email: string, password: string): Observable<any> {

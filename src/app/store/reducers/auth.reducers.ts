@@ -11,10 +11,10 @@ export interface AuthState {
   errorMessage: string | null;
 }
 
-const currentAuthState: AuthData = JSON.parse(localStorage.getItem('auth'));
-const currentUser: User = JSON.parse(localStorage.getItem('currentUser'));
-console.log(currentAuthState);
-console.log(currentUser);
+const localStorageUserData = localStorage.getItem('currentUser');
+const localStorageAuthData = localStorage.getItem('currentUser');
+const currentAuthState: AuthData = localStorageAuthData && localStorageAuthData !== 'undefined' ? JSON.parse(localStorageAuthData) : null;
+const currentUser: User = localStorageUserData && localStorageUserData !== 'undefined' ? JSON.parse(localStorageUserData) : null;
 
 export const initialState: AuthState = currentAuthState
   && currentUser ?
@@ -53,10 +53,10 @@ export function reducer(state = initialState, action: All): AuthState {
         ...state,
         auth: {
           token: action.payload.token,
-          tokenExpires: action.payload.tokenExpires,
-          user: action.payload.email
+          tokenExpires: action.payload.expires,
+          user: action.payload.user.email
         },
-        user: null,
+        user: action.payload.user,
         errorMessage: null
       };
     }
