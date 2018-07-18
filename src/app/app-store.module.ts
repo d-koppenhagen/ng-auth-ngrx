@@ -15,7 +15,6 @@ import { reducers } from './store/app.states';
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([AuthEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : []
-  ],
-  exports: [AppStoreModule]
+  ]
 })
 export class AppStoreModule { }
