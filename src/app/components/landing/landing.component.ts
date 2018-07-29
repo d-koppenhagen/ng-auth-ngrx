@@ -25,7 +25,6 @@ export class LandingComponent implements OnInit {
 
   ngOnInit() {
     this._store.select(selectAuthState).subscribe(state => {
-      console.log(state);
       this.auth = state.auth;
       this.user = state.user;
       this.errorMessage = state.errorMessage;

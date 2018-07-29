@@ -39,7 +39,6 @@ export class AuthEffects {
               return new LogInSuccess(res);
             }),
             catchError(error => {
-              console.log(error);
               return observableOf(new LogInFailure({ error: error }));
             })
           );
