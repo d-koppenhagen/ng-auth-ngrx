@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-12">
 
-    <h1>Angular + NGRX</h1>
+    <h1>Landing</h1>
     <hr><br>
 
     <div *ngIf="auth?.token; then doSomething; else doSomethingElse;"></div>
@@ -14,7 +14,7 @@
       <a [routerLink]="['/signup']" class="btn btn-primary">Signup</a>
     </ng-template>
 
-    <a (click)="getExampleData()" class="btn btn-primary">Get Data</a>
+    <button (click)="getExampleData()" class="btn btn-primary">Get Data</button>
 
     <br>
 
@@ -34,7 +34,7 @@
     <div class="card" *ngIf="exampleData">
       <div class="card-body">
         <h5 class="card-title">Example Data fetched from server</h5>
-        {{ exampleData | json }}
+        <p class="server-content">{{ exampleData | json }}</p>
       </div>
     </div>
 

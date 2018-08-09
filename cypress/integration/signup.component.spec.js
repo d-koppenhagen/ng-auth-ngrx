@@ -2,39 +2,33 @@ describe('SignUp Component', () => {
 
   it('should sign a user up', () => {
     cy
-      .signup('test@test.com', 'test');
+      .signup('user@example.com', 'example');
     cy
       .location('pathname').should('eq', '/')
-      .get('p').contains('You logged in test@test.com!')
-      .get('a.btn').contains('Log in').should('not.be.visible')
-      .get('a.btn').contains('Sign up').should('not.be.visible')
-      .get('a.btn').contains('Status')
-      .get('button.btn').contains('Log out');
+      .get('p').contains('You logged in user@example.com!')
+      .get('a.btn').should('have.length', 0)
+      .get('h5.card-title').contains('Current State')
+      .get('button.btn').contains('Logout')
+      .get('button.btn').contains('Get Data')
+      .get('ul>li').should('have.length', 5);
   });
 
+  /**
+   * Test can be implemented if the backend will really check the credentials
+   */
+  /*
   it('should throw an error if the email is already is use', () => {
     cy
       .signup('in@use.com', 'test');
     cy
       .get('p')
-      .contains('You logged in test@test.com!')
+      .contains('You logged in user@example.com!')
       .should('not.be.visible');
     cy
       .location('pathname').should('eq', '/signup')
       .get('div.alert.alert-danger')
       .contains('That email is already in use.');
   });
-
-  it('should not display an error message when a user first hits the component', () => {
-    cy
-      .login('not@correct.com', 'incorrect')
-      .get('div.alert.alert-danger')
-      .contains('Incorrect email and/or password.')
-      .get('a.btn').contains('Cancel').click()
-      .get('a.btn').contains('Sign up').click();
-    // cy
-    //   .get('div.alert.alert-danger')
-    //   .should('not.be.visible');
-  });
+  */
 
 });
