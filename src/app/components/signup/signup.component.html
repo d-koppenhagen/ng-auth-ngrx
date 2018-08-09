@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-4">
-    <h1>Sign up</h1>
+    <h1>Signup</h1>
     <hr><br>
     <div *ngIf="errorMessage">
       <div class="alert alert-danger" role="alert">
@@ -30,12 +30,12 @@
           id="password"
           placeholder="enter a password">
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary">Signup</button>
       <a [routerLink]="['/']" class="btn btn-success">Cancel</a>
     </form>
     <p>
       <span>Already have an account?&nbsp;</span>
-      <a [routerLink]="['/login']">Log in!</a>
+      <a [routerLink]="['/login']">Login!</a>
     </p>
   </div>
 </div>
