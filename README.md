@@ -16,3 +16,6 @@ You will need to also spin up a back-end with the following routes:
 | http://localhost:8080/api/v1/example    | GET      | Get some example data       | | some JSON object |
 
 The returned token expiration will be checked against the current date. If the token is already expired, the backend should return an error.
+
+## Backend
+For trying out you can use the [This example backend](https://github.com/d-koppenhagen/auth-backend-example).
