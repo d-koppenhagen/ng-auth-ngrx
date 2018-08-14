@@ -15,7 +15,7 @@ export class ExampleService {
     this.baseUrl = `${this._apiUrl}/api/v1`;
   }
 
-  getExampleData(): Observable<any> {
+  getExampleData(): Observable<{[key: string]: any}> {
     const url = `${this.baseUrl}/example`;
     return this._http.get<any>(url);
   }

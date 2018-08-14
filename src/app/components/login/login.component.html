@@ -2,9 +2,9 @@
   <div class="col-md-4">
     <h1>Login</h1>
     <hr><br>
-    <div *ngIf="errorMessage">
+    <div *ngIf="errorMessage$ | async as error">
       <div class="alert alert-danger" role="alert">
-        {{errorMessage}}
+        {{ error }}
       </div>
     </div>
     <form (ngSubmit)="onSubmit()" ngNativeValidate>

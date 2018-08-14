@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 import { User } from '../../models/user';
-import { AppState, selectAuthState } from '../../store/app.states';
+import { AuthState } from '../../models/auth';
+import { getAuthState, AppState } from '../../store/app.states';
 import { SignUp } from '../../store/actions/auth.actions';
 
 @Component({
@@ -11,18 +13,16 @@ import { SignUp } from '../../store/actions/auth.actions';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-
+  authState$: Observable<AuthState>;
   user: User = new User();
-  errorMessage: string | null;
 
   constructor(
     private _store: Store<AppState>
   ) { }
 
   ngOnInit() {
-    this._store.select(selectAuthState).subscribe(state => {
-      this.errorMessage = state.errorMessage;
-    });
+    this.authState$ = this._store
+      .pipe(select(getAuthState));
   }
 
   onSubmit() {

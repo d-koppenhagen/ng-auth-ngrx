@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
-import { selectAuthState, AppState } from '../../store/app.states';
+import { getAuthState, AppState } from '../../store/app.states';
+import { AuthState } from '../../models/auth';
 import { LogOut } from '../../store/actions/auth.actions';
 import { ExampleService } from '../../services/example.service';
 
@@ -12,10 +14,8 @@ import { ExampleService } from '../../services/example.service';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
-  auth = null;
-  user = null;
-  errorMessage = null;
-  exampleData = null;
+  authState$: Observable<AuthState>;
+  exampleData$: Observable<{[key: string]: any}>;
 
   constructor(
     private _store: Store<AppState>,
@@ -24,11 +24,8 @@ export class LandingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._store.select(selectAuthState).subscribe(state => {
-      this.auth = state.auth;
-      this.user = state.user;
-      this.errorMessage = state.errorMessage;
-    });
+    this.authState$ = this._store
+      .pipe(select(getAuthState));
   }
 
   logOut() {
@@ -37,8 +34,7 @@ export class LandingComponent implements OnInit {
   }
 
   getExampleData() {
-    this._es.getExampleData()
-      .subscribe(res => this.exampleData = res);
+    this.exampleData$ = this._es.getExampleData();
   }
 
 }

@@ -1,15 +1,7 @@
 import { User } from '../../models/user';
+import { AuthState } from '../../models/auth';
 import { AuthData } from '../../models/auth';
 import { AuthActionTypes, All } from '../actions/auth.actions';
-
-export interface AuthState {
-  // is a user authenticated?
-  auth: AuthData;
-  // if authenticated, there should be a user object
-  user: User | null;
-  // error message
-  errorMessage: string | null;
-}
 
 const localStorageUserData = localStorage.getItem('currentUser');
 const localStorageAuthData = localStorage.getItem('currentUser');

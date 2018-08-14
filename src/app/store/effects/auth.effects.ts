@@ -22,13 +22,13 @@ import { AuthData } from '../../models/auth';
 export class AuthEffects {
 
   constructor(
-    private _actions: Actions,
+    private _actions$: Actions,
     private _authService: AuthService,
     private _router: Router,
   ) {}
 
   @Effect()
-  LogIn: Observable<any> = this._actions
+  LogIn$: Observable<any> = this._actions$
     .ofType(AuthActionTypes.LOGIN)
     .pipe(
       map((action: LogIn) => action.payload),
@@ -47,7 +47,7 @@ export class AuthEffects {
 
 
   @Effect({ dispatch: false })
-  LogInSuccess: Observable<any> = this._actions.pipe(
+  LogInSuccess$: Observable<any> = this._actions$.pipe(
     ofType(AuthActionTypes.LOGIN_SUCCESS),
     tap(res => {
       const authData: AuthData = {
@@ -62,12 +62,12 @@ export class AuthEffects {
   );
 
   @Effect({ dispatch: false })
-  LogInFailure: Observable<any> = this._actions.pipe(
+  LogInFailure$: Observable<any> = this._actions$.pipe(
     ofType(AuthActionTypes.LOGIN_FAILURE)
   );
 
   @Effect()
-  SignUp: Observable<any> = this._actions
+  SignUp$: Observable<any> = this._actions$
     .ofType(AuthActionTypes.SIGNUP)
     .pipe(
       map((action: SignUp) => action.payload),
@@ -85,7 +85,7 @@ export class AuthEffects {
     );
 
   @Effect({ dispatch: false })
-  SignUpSuccess: Observable<any> = this._actions.pipe(
+  SignUpSuccess$: Observable<any> = this._actions$.pipe(
     ofType(AuthActionTypes.SIGNUP_SUCCESS),
     tap((res) => {
       const authData: AuthData = {
@@ -100,12 +100,12 @@ export class AuthEffects {
   );
 
   @Effect({ dispatch: false })
-  SignUpFailure: Observable<any> = this._actions.pipe(
+  SignUpFailure$: Observable<any> = this._actions$.pipe(
     ofType(AuthActionTypes.SIGNUP_FAILURE)
   );
 
   @Effect({ dispatch: false })
-  public LogOut: Observable<any> = this._actions.pipe(
+  LogOut$: Observable<any> = this._actions$.pipe(
     ofType(AuthActionTypes.LOGOUT),
     tap((user) => {
       localStorage.removeItem('currentUser');
