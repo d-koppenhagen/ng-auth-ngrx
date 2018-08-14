@@ -1,12 +1,12 @@
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-12" *ngIf="authState$ | async as state">
 
     <h1>Landing</h1>
     <hr><br>
 
-    <div *ngIf="auth?.token; then doSomething; else doSomethingElse;"></div>
+    <div *ngIf="state.auth?.token; then doSomething; else doSomethingElse;"></div>
     <ng-template #doSomething>
-      <p>You logged in <em>{{ auth.user }}!</em></p>
+      <p>You logged in <em>{{ state.auth.user }}!</em></p>
       <button class="btn btn-primary" (click)="logOut()">Logout</button>
     </ng-template>
     <ng-template #doSomethingElse>
@@ -22,19 +22,19 @@
       <div class="card-body">
         <h5 class="card-title">Current State</h5>
         <ul>
-          <li><strong>auth.user</strong> - {{ auth.user }}</li>
-          <li><strong>auth.token</strong> - {{ auth.token }}</li>
-          <li><strong>auth.tokenExpires</strong> - {{ auth.tokenExpires }}</li>
-          <li><strong>user</strong> - {{ user || 'null' | json }}</li>
-          <li><strong>errorMessage</strong> - {{ errorMessage || 'null' }}</li>
+          <li><strong>state.auth.user</strong> - {{ state.auth.user }}</li>
+          <li><strong>state.auth.token</strong> - {{ state.auth.token }}</li>
+          <li><strong>state.auth.tokenExpires</strong> - {{ state.auth.tokenExpires }}</li>
+          <li><strong>state.user</strong> - {{ state.user || 'null' | json }}</li>
+          <li><strong>state.errorMessage</strong> - {{ state.errorMessage || 'null' }}</li>
         </ul>
       </div>
     </div>
 
-    <div class="card" *ngIf="exampleData">
+    <div class="card" *ngIf="exampleData$ | async as data">
       <div class="card-body">
         <h5 class="card-title">Example Data fetched from server</h5>
-        <p class="server-content">{{ exampleData | json }}</p>
+        <p class="server-content">{{ data | json }}</p>
       </div>
     </div>
 
