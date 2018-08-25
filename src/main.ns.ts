@@ -1,5 +1,7 @@
 // this import should be first in order to load some required settings (like globals and reflect-metadata)
 import { platformNativeScriptDynamic } from 'nativescript-angular/platform';
+
+// adds a shim for localStorage access
 import 'nativescript-localstorage';
 
 import { AppModule } from './app/app.module.tns';
