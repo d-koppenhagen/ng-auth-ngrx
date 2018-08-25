@@ -1,4 +1,27 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<StackLayout class="p-20">
-    <Label text="Welcome to landingComponent!" class="h1 text-center" textWrap="true"></Label>
+<StackLayout class="p-20" *ngIf="authState$ | async as state">
+  <Label text="Landing" class="h1 text-center" textWrap="true"></Label>
+  <Placeholder *ngIf="state.auth?.token; then doSomething; else doSomethingElse;"></Placeholder>
+
+  <ng-template #doSomething>
+    <Label text="You logged in as {{ state?.auth?.user }}!" class="h1 text-center" textWrap="true"></Label>
+    <Button text="Logout" (tap)="logOut()"></Button>
+
+    <ListView class="list-group">
+      <Label text="state.auth.user: {{ state.auth.user }}" class="list-group-item-heading"></Label>
+      <Label text="state.auth.token: {{ state.auth.token }}" class="list-group-item-heading"></Label>
+      <Label text="state.auth.tokenExpires: {{ state.auth.tokenExpires }}" class="list-group-item-heading"></Label>
+      <Label text="state.auth.user: {{ state.auth.user || 'null' | json }}" class="list-group-item-heading"></Label>
+      <Label text="state.auth.errorMessage: {{ state.errorMessage || 'null' }}" class="list-group-item-heading"></Label>
+    </ListView>
+
+    <Button text="Get Example Data" (tap)="getExampleData()"></Button>
+    <TextView *ngIf="exampleData$ | async as data" text="{{ data | json }}"></TextView>
+  </ng-template>
+
+  <ng-template #doSomethingElse>
+    <Button text="Login" [nsRouterLink]="['/login']"></Button>
+    <Button text="Signup" [nsRouterLink]="['/signup']"></Button>
+  </ng-template>
+
 </StackLayout>
