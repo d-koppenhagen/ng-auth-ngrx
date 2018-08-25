@@ -3,30 +3,22 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-// modules
-import { AppRoutingModule } from './app-routing.module';
-import { AppStoreModule } from './app-store.module';
-
-// components
 import { AppComponent } from './app.component';
-import { LandingComponent } from './components/landing/landing.component';
-import { LoginComponent } from './components/login/login.component';
-import { SignupComponent } from './components/signup/signup.component';
+import { SHARED_DECLARATIONS, SHARED_IMPORTS, SHARED_PROVIDERS } from './app.common';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LandingComponent,
-    LoginComponent,
-    SignupComponent
+    ...SHARED_DECLARATIONS
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppStoreModule,
-    AppRoutingModule
+    ...SHARED_IMPORTS
+  ],
+  providers: [
+    ...SHARED_PROVIDERS
   ],
   bootstrap: [AppComponent]
 })
