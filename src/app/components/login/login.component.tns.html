@@ -1,4 +1,31 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<StackLayout class="p-20">
-    <Label text="Welcome to loginComponent!" class="h1 text-center" textWrap="true"></Label>
-</StackLayout>
+<StackLayout class="form">
+    <Label text="Login" class="h1 text-center" textWrap="true"></Label>
+
+    <Label *ngIf="errorMessage$ | async as error"
+           class="text-danger"
+           [text]="error" textWrap="true"></Label>
+
+    <StackLayout class="input-field">
+      <TextField hint="E-Mail" class="input"
+      [(ngModel)]="user.email"
+      name="email"
+      type="email"
+      required></TextField>
+      <StackLayout class="hr-light"></StackLayout>
+    </StackLayout>
+
+    <StackLayout class="input-field">
+      <TextField hint="Password" class="input"
+      [(ngModel)]="user.password"
+      name="password"
+      type="password"
+      required
+      secure="true"></TextField>
+      <StackLayout class="hr-light"></StackLayout>
+    </StackLayout>
+
+    <Button class="btn btn-primary btn-rounded-lg" text="Login" type="submit" (tap)="onSubmit()"></Button>
+    <Button class="btn btn-primary btn-rounded-lg" text="Cancel" [nsRouterLink]="['/']"></Button>
+    <Button class="btn btn-primary btn-rounded-lg" text="Signup" [nsRouterLink]="['/signup']"></Button>
+
+  </StackLayout>
