@@ -15,13 +15,13 @@
       <Label text="state.auth.errorMessage: {{ state.errorMessage || 'null' }}" class="list-group-item-heading"></Label>
     </ListView>
 
-    <Button text="Get Example Data" (tap)="getExampleData()"></Button>
+    <Button text="Get Example Data" (tap)="getExampleData()" class="btn btn-primary btn-rounded-lg"></Button>
     <TextView *ngIf="exampleData$ | async as data" text="{{ data | json }}"></TextView>
   </ng-template>
 
   <ng-template #doSomethingElse>
-    <Button text="Login" [nsRouterLink]="['/login']"></Button>
-    <Button text="Signup" [nsRouterLink]="['/signup']"></Button>
+    <Button text="Login" class="btn btn-primary btn-rounded-lg" [nsRouterLink]="['/login']"></Button>
+    <Button text="Signup" class="btn btn-primary btn-rounded-lg" [nsRouterLink]="['/signup']"></Button>
   </ng-template>
 
 </StackLayout>
