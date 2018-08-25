@@ -39,5 +39,8 @@ export const SHARED_PROVIDERS: any[] = [
     useClass: ErrorInterceptor,
     multi: true
   },
-  { provide: 'API_URL', useValue: environment.apiUrl }
+  {
+    provide: 'API_URL',
+    useValue: environment.apiUrl
+  }
 ];
