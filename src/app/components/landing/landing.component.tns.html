@@ -1,11 +1,10 @@
-<!--The content below is only a placeholder and can be replaced.-->
+<ActionBar class="action-bar" title="Landing"></ActionBar>
 <StackLayout class="p-20" *ngIf="authState$ | async as state">
-  <Label text="Landing" class="h1 text-center" textWrap="true"></Label>
   <Placeholder *ngIf="state.auth?.token; then doSomething; else doSomethingElse;"></Placeholder>
 
   <ng-template #doSomething>
     <Label text="You logged in as {{ state?.auth?.user }}!" class="h1 text-center" textWrap="true"></Label>
-    <Button text="Logout" (tap)="logOut()"></Button>
+    <Button text="Logout" class="btn btn-primary btn-rounded-lg" (tap)="logOut()"></Button>
 
     <ListView class="list-group">
       <Label text="state.auth.user: {{ state.auth.user }}" class="list-group-item-heading"></Label>
@@ -20,8 +19,10 @@
   </ng-template>
 
   <ng-template #doSomethingElse>
-    <Button text="Login" class="btn btn-primary btn-rounded-lg" [nsRouterLink]="['/login']"></Button>
-    <Button text="Signup" class="btn btn-primary btn-rounded-lg" [nsRouterLink]="['/signup']"></Button>
+    <StackLayout orientation="horizontal">
+      <Button text="Login" class="btn btn-primary btn-rounded-lg" [nsRouterLink]="['/login']" margin="8"></Button>
+      <Button text="Signup" class="btn btn-primary btn-rounded-lg" [nsRouterLink]="['/signup']" margin="8"></Button>
+    </StackLayout>
   </ng-template>
 
 </StackLayout>

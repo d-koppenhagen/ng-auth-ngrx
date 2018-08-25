@@ -1,6 +1,5 @@
+<ActionBar class="action-bar" title="Login"></ActionBar>
 <StackLayout class="form">
-    <Label text="Login" class="h1 text-center" textWrap="true"></Label>
-
     <Label *ngIf="errorMessage$ | async as error"
            class="text-danger"
            [text]="error" textWrap="true"></Label>
