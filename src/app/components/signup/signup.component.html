@@ -2,9 +2,9 @@
   <div class="col-md-4">
     <h1>Signup</h1>
     <hr><br>
-    <div *ngIf="errorMessage">
+    <div  *ngIf="authState$ | async as authState">
       <div class="alert alert-danger" role="alert">
-        {{errorMessage}}
+        {{ authState | json }}
       </div>
     </div>
     <form (ngSubmit)="onSubmit()" ngNativeValidate>

@@ -3,8 +3,12 @@
   <Placeholder *ngIf="state.auth?.token; then doSomething; else doSomethingElse;"></Placeholder>
 
   <ng-template #doSomething>
-    <Label text="You logged in as {{ state?.auth?.user }}!" class="h1 text-center" textWrap="true"></Label>
-    <Button text="Logout" class="btn btn-primary btn-rounded-lg" (tap)="logOut()"></Button>
+    <Label class="h1 text-center"
+      textWrap="true"
+      text="You logged in as {{ state?.auth?.user }}!" ></Label>
+    <Button class="btn btn-primary btn-rounded-lg"
+      text="Logout"
+      (tap)="logOut()"></Button>
 
     <ListView class="list-group">
       <Label text="state.auth.user: {{ state.auth.user }}" class="list-group-item-heading"></Label>
@@ -14,15 +18,23 @@
       <Label text="state.auth.errorMessage: {{ state.errorMessage || 'null' }}" class="list-group-item-heading"></Label>
     </ListView>
 
-    <Button text="Get Example Data" (tap)="getExampleData()" class="btn btn-primary btn-rounded-lg"></Button>
+    <Button class="btn btn-primary btn-rounded-lg"
+      text="Get Example Data"
+      (tap)="getExampleData()"></Button>
+
     <TextView *ngIf="exampleData$ | async as data" text="{{ data | json }}"></TextView>
   </ng-template>
 
   <ng-template #doSomethingElse>
-    <StackLayout orientation="horizontal">
-      <Button text="Login" class="btn btn-primary btn-rounded-lg" [nsRouterLink]="['/login']" margin="8"></Button>
-      <Button text="Signup" class="btn btn-primary btn-rounded-lg" [nsRouterLink]="['/signup']" margin="8"></Button>
-    </StackLayout>
+    <FlexboxLayout alignItems="center" justifyContent="space-between">
+      <Button class="btn btn-primary btn-rounded-sm"
+        text="Login"
+        [nsRouterLink]="['/login']"
+        width="155"></Button>
+      <Button class="btn btn-primary btn-rounded-sm"
+        text="Signup"
+        [nsRouterLink]="['/signup']"
+        width="155"></Button>
+    </FlexboxLayout>
   </ng-template>
-
 </StackLayout>

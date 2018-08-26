@@ -1,30 +1,50 @@
 <ActionBar class="action-bar" title="Login"></ActionBar>
-<StackLayout class="form">
+
+<FlexboxLayout class="page p-t-30">
+  <StackLayout class="form">
     <Label *ngIf="errorMessage$ | async as error"
            class="text-danger"
-           [text]="error" textWrap="true"></Label>
+           [text]="error"
+           textWrap="true"></Label>
 
     <StackLayout class="input-field">
-      <TextField hint="E-Mail" class="input"
+      <TextField class="input"
       [(ngModel)]="user.email"
+      hint="E-Mail"
       name="email"
-      type="email"
+      keyboardType="email"
+      autocorrect="false"
+      autocapitalizationType="none"
       required></TextField>
       <StackLayout class="hr-light"></StackLayout>
     </StackLayout>
 
     <StackLayout class="input-field">
-      <TextField hint="Password" class="input"
+      <TextField class="input"
       [(ngModel)]="user.password"
+      hint="Password"
       name="password"
-      type="password"
-      required
-      secure="true"></TextField>
+      autocapitalizationType="none"
+      secure="true"
+      required></TextField>
       <StackLayout class="hr-light"></StackLayout>
     </StackLayout>
 
-    <Button class="btn btn-primary btn-rounded-lg" text="Login" type="submit" (tap)="onSubmit()"></Button>
-    <Button class="btn btn-primary btn-rounded-lg" text="Cancel" [nsRouterLink]="['/']"></Button>
-    <Button class="btn btn-primary btn-rounded-lg" text="Signup" [nsRouterLink]="['/signup']"></Button>
+    <Button class="btn btn-primary btn-rounded-sm p-t-20"
+      text="Login"
+      type="submit"
+      (tap)="onSubmit()"></Button>
+
+    <FlexboxLayout alignItems="center" justifyContent="space-between">
+      <Button class="btn btn-rounded-sm btn-outline"
+        text="Cancel"
+        width="155"
+        [nsRouterLink]="['/']"></Button>
+      <Button class="btn btn-rounded-sm btn-outline"
+        text="Signup"
+        width="155"
+        [nsRouterLink]="['/signup']"></Button>
+    </FlexboxLayout>
 
   </StackLayout>
+</FlexboxLayout>
