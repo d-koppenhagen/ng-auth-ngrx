@@ -9,6 +9,26 @@
     </div>
     <form (ngSubmit)="onSubmit()" ngNativeValidate>
       <div class="form-group">
+        <label for="firstname">Firstname</label>
+        <input
+          [(ngModel)]="user.firstname"
+          name="firstname"
+          required
+          class="form-control"
+          id="firstname"
+          placeholder="enter your firstname">
+      </div>
+      <div class="form-group">
+        <label for="lastname">Lastname</label>
+        <input
+          [(ngModel)]="user.lastname"
+          name="lastname"
+          required
+          class="form-control"
+          id="lastname"
+          placeholder="enter your lastname">
+      </div>
+      <div class="form-group">
         <label for="email">Email</label>
         <input
           [(ngModel)]="user.email"

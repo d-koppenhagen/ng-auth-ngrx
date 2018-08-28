@@ -1,4 +1,68 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<StackLayout class="p-20">
-    <Label text="Welcome to signupComponent!" class="h1 text-center" textWrap="true"></Label>
-</StackLayout>
+<ActionBar class="action-bar" title="Signup"></ActionBar>
+
+<FlexboxLayout class="page p-t-30">
+  <StackLayout class="form">
+    <Label *ngIf="errorMessage$ | async as error"
+           class="text-danger"
+           [text]="error"
+           textWrap="true"></Label>
+
+    <StackLayout class="input-field">
+      <TextField class="input"
+      [(ngModel)]="user.firstname"
+      hint="Firstname"
+      name="firstname"
+      required></TextField>
+      <StackLayout class="hr-light"></StackLayout>
+    </StackLayout>
+
+    <StackLayout class="input-field">
+      <TextField class="input"
+      [(ngModel)]="user.lastname"
+      hint="Lastname"
+      name="lastname"
+      required></TextField>
+      <StackLayout class="hr-light"></StackLayout>
+    </StackLayout>
+
+    <StackLayout class="input-field">
+      <TextField class="input"
+      [(ngModel)]="user.email"
+      hint="E-Mail"
+      name="email"
+      keyboardType="email"
+      autocorrect="false"
+      autocapitalizationType="none"
+      required></TextField>
+      <StackLayout class="hr-light"></StackLayout>
+    </StackLayout>
+
+    <StackLayout class="input-field">
+      <TextField class="input"
+      [(ngModel)]="user.password"
+      hint="Password"
+      name="password"
+      autocapitalizationType="none"
+      secure="true"
+      required></TextField>
+      <StackLayout class="hr-light"></StackLayout>
+    </StackLayout>
+
+    <Button class="btn btn-primary btn-rounded-sm p-t-20"
+      text="Signup"
+      type="submit"
+      (tap)="onSubmit()"></Button>
+
+    <FlexboxLayout alignItems="center" justifyContent="space-between">
+      <Button class="btn btn-rounded-sm btn-outline"
+        text="Cancel"
+        width="155"
+        [nsRouterLink]="['/']"></Button>
+      <Button class="btn btn-rounded-sm btn-outline"
+        text="Login"
+        width="155"
+        [nsRouterLink]="['/Login']"></Button>
+    </FlexboxLayout>
+
+  </StackLayout>
+</FlexboxLayout>
